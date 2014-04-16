@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.object.MappingSqlQuery;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.*;
 import com.web.dao.Offer;
 import com.web.service.OffersService;
 
@@ -88,14 +90,14 @@ public class OffersController {
 		return "createOffer";
 	}
 	@RequestMapping("/docreate")
-	public String doCreate(Model model, Offer offer,BindingResult result){
+	public String doCreate(Model model,@Valid Offer offer,BindingResult result){
 		
 		System.out.println(offer);
 		if(result.hasErrors()){
 			System.out.println("form does not validate.");
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error: errors){
-				System.out.println(error);
+				System.out.println(error.getDefaultMessage());
 			}
 			
 		}else{
