@@ -8,11 +8,13 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,11 +69,19 @@ public class OffersController {
 	
 	@RequestMapping("/offers")
 	public String showOffers(Model model){
+		
+		//offersService.throwTestException();
+		
 		List<Offer> offers = offersService.getCurrent();
 		model.addAttribute("offers",offers);
 		
 		return "offers";
 	}
+	
+//	@ExceptionHandler(DataAccessException.class)
+//	public String handleDatabaseException(DataAccessException dae){
+//		return "error";
+//	}
 
 	//@RequestMapping(value="/test",method=RequestMethod.GET)
 	@RequestMapping("/test")
@@ -84,8 +94,10 @@ public class OffersController {
 	
 	@RequestMapping("/createoffer")
 	public String createOffer(Model model){
-		List<Offer> offers = offersService.getCurrent();
-		model.addAttribute("offers",offers);
+		//List<Offer> offers = offersService.getCurrent();
+		//model.addAttribute("offers",offers);
+		model.addAttribute("offer",new Offer());
+		
 		
 		return "createOffer";
 	}
@@ -99,9 +111,11 @@ public class OffersController {
 			for(ObjectError error: errors){
 				System.out.println(error.getDefaultMessage());
 			}
+			return "createOffer";
 			
 		}else{
 			System.out.println("Form validated.");
+			offersService.create(offer);
 		}
 		
 		return "offercreated";

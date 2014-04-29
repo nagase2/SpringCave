@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 
-offer Created.<a href="${pageContext.request.contextPath}/offers">xxx</a>
+some of error have been happend.
+Please return this site after several minutes later.
 
 </body>
 </html>

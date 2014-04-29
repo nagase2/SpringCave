@@ -13,7 +13,7 @@ input[type=text] {
 
 textarea {
 	width: 250px;
-	height: 300px;
+	height: 150px;
 }
 
 .label {
@@ -23,4 +23,17 @@ textarea {
 
 .control {
 	margin-left: 10px;
+	color:blue;
+}
+.error{ 
+	font-size:small;
+	margin-left:10px;
+	color:red;
+}
+#aaa{
+	color:red;
+}
+table.offers{
+	padding:10px;
+	border:1px solid gray;
 }
