@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+		
 
 <sf:form method="post" action="${pageContext.request.contextPath}/docreate" commandName="offer">
 <table>

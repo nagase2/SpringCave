@@ -13,7 +13,7 @@
 </head>
 <body>
 
-
+<h2>New Account</h2>
 	<sf:form method="post"
 		action="${pageContext.request.contextPath}/createaccount"
 		commandName="user">

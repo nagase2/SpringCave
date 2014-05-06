@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
 
 @Component("offersDao123")
-public class OffersDAO {
+public class OffersDao {
 	
 	private NamedParameterJdbcTemplate jdbc;
 
