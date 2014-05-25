@@ -33,6 +33,12 @@ public class UsersDao {
 		jdbc.update("insert into users (username,  password, email, enabled) values (:username, :password, :email, :enabled)", params);
 		return jdbc.update("insert into authorities (username, authority) values(:username, :authority)",params) == 1;
 	}
+
+
+	public boolean exists(String username) {
+		return jdbc.queryForObject("select count(*) from users where username=:username",
+				new MapSqlParameterSource("username",username), Integer.class) > 0;
+	}
 	
 	
 }

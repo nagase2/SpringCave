@@ -1,8 +1,22 @@
 package com.web.dao;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
+	@NotBlank(message="Username cannot be blank")
+	@Size(min=3,max=15)
 	private String username;
+	@NotBlank(message="Password cannot be blank")
+	//@Pattern(regexp="^¥¥S+$",message="password is too simple")
+	@Size(min=3,max=15)
 	private String password;
+	@NotBlank(message="Please imput email")
+	@Email(message="this is not appear to be a valid email address")
 	private String email;
 	private boolean enabled = false;
 	private String authority;

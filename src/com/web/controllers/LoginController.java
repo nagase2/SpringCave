@@ -1,10 +1,11 @@
 package com.web.controllers;
 
-import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import com.web.service.UsersService;
 @Controller
 public class LoginController {
 	
+	static Logger logger = Logger.getRootLogger();
 	private UsersService usersService;
 	
 	@Autowired
@@ -29,6 +31,11 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("/logout")
+	public String showLogout(){
+		return "logout";
+	}
+	
 	@RequestMapping("/newaccount")
 	public String showNewAccount(Model model){
 		
@@ -38,18 +45,27 @@ public class LoginController {
 	
 	@RequestMapping(value="/createaccount",method=RequestMethod.POST)
 	public String createAccount(@Valid User user, BindingResult result){
-	
-		Logger.getLogger("a").fine("createaccount");
-		System.out.println("java.lang.reflect.Method.invoke(Method.java:597)");
-		System.out.println("xxxxxxx(Method.java:597)");
+		logger.info("createaccount");
 		
 		if(result.hasErrors()){
-			return "createaccount";
+			logger.warn("error has been happened");
+			return "newaccount";
 		}
 		user.setAuthority("user");
 		user.setEnabled(true);
-		usersService.create(user);
 		
+		//ユーザ重複チェック
+		if(usersService.exists(user.getUsername())){
+			logger.info("Account has been duplicated After check.");
+			result.rejectValue("username", "DupliateKey.user.username");
+			return "newaccount";
+		}
+		
+		try{
+		usersService.create(user);
+		}catch(DataAccessException e){
+			e.printStackTrace();
+		}
 		
 		return "accountcreated";
 	}

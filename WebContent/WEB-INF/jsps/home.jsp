@@ -13,7 +13,9 @@
 	
 <p><a href="${pageContext.request.contextPath}/offers">showoffers</a></p>
 <p><a href="${pageContext.request.contextPath}/createoffer">createoffers</a></p>
+<p><a href="${pageContext.request.contextPath}/admin">admin</a></p>
 
 
+<p><a href="<c:url value='/j_spring_security_logout'/>">Log out</a>
 </body>
 </html>
