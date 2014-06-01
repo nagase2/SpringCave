@@ -61,13 +61,13 @@ $(document).ready(onLoad);
 			<tr>
 				<td>Password:</td>
 				<td><sf:input class="control" id="password" name="password" path="password"
-						type="text" /><br /> <sf:errors id="aaa" path="password"
+						type="password" /><br /> <sf:errors id="aaa" path="password"
 						cssClass="error"></sf:errors></td>
 			</tr>
 			<tr>
 				<td>Confirm Password:</td>
 				<td><input class="control" id="confirmpass" name="confirmpass" 
-						type="text" /><div id="matchpass"></div><br /></td>
+						type="password" /><div id="matchpass"></div><br /></td>
 			</tr>
 
 

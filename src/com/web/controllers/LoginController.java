@@ -1,6 +1,8 @@
 package com.web.controllers;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -30,6 +32,21 @@ public class LoginController {
 	public String showLogin(){
 		return "login";
 	}
+	@RequestMapping("/denied")
+	public String showDenied(){
+		return "denied";
+	}
+	
+	@RequestMapping("/admin")
+	public String showAdmin(Model model){
+	//	try{
+		List<User> users = usersService.getAllUsers();
+		model.addAttribute("users",users);
+//		}catch(Exception e){
+//			System.out.println("ERROR! " + e.getClass());
+//		}
+		return "admin";
+	}
 	
 	@RequestMapping("/logout")
 	public String showLogout(){
@@ -51,7 +68,7 @@ public class LoginController {
 			logger.warn("error has been happened");
 			return "newaccount";
 		}
-		user.setAuthority("user");
+		user.setAuthority("ROLE_USER");
 		user.setEnabled(true);
 		
 		//ユーザ重複チェック

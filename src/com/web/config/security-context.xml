@@ -11,21 +11,22 @@
 			<security:user-service>
 				<security:user name="John" authorities="admin"
 					password="letmein" />
-				<security:user name="nagase" authorities="admin"
-					password="nagase2" />
 				<security:user name="xxxx" authorities="admin"
-					password="letmein" />
+					password="xxxx" />
+				
 			</security:user-service>
 		</security:authentication-provider>
 
 		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="dataSource" />
+			<security:jdbc-user-service data-source-ref="dataSource"
+				id="jdbcUserService" />
+			<security:password-encoder ref="passwordEncoder"></security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 
 	<security:http use-expressions="true">
-		<security:intercept-url pattern="/admin" access="hasAnyRole('admin','manager')" />
-		
+		<security:intercept-url pattern="/admin" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')" />
+				
 		<security:intercept-url pattern="/createoffer" access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate" access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated" access="isAuthenticated()" />
@@ -37,9 +38,19 @@
 		<security:intercept-url pattern="/static/**" access="permitAll" />
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/offers" access="permitAll" />
+		<security:intercept-url pattern="/denied" access="permitAll" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
 			authentication-failure-url="/login?error=true" />
 		<security:logout logout-success-url="/logout" />
+		<security:access-denied-handler error-page="/denied" />
+		<security:remember-me key="offersAppKey"
+			user-service-ref="jdbcUserService" />
 	</security:http>
+	
+	<security:global-method-security secured-annotations="enabled"></security:global-method-security>
+	
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+	</bean>
 </beans>
