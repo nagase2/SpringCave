@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<context:component-scan base-package="com.web.controllers">
+<context:component-scan base-package="com.web.controllers">
 	</context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<bean id="jspViewResolver"
@@ -19,5 +19,18 @@
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 	<property name="basename" value="com.web.messages.messages"></property>
+	</bean>
+	
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+	</bean>
+	
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	<property name="definitions">
+		<list>
+			<value>/WEB-INF/layouts/default.xml</value>
+		</list>
+	</property>
 	</bean>
 </beans>
