@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.object.MappingSqlQuery;
@@ -27,6 +28,7 @@ import com.web.service.OffersService;
 @Controller
 public class OffersController {
 	
+	static Logger logger = Logger.getRootLogger();
 	private OffersService offersService;
 	/*
 	@RequestMapping("/")
@@ -69,7 +71,7 @@ public class OffersController {
 	
 	@RequestMapping("/offers")
 	public String showOffers(Model model){
-		
+		logger.info("show Offer LIstxxxeeeee");
 		//offersService.throwTestException();
 		
 		List<Offer> offers = offersService.getCurrent();

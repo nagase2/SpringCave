@@ -30,6 +30,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String showLogin(){
+		logger.info("login contoroller....");
 		return "login";
 	}
 	@RequestMapping("/denied")

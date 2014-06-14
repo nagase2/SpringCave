@@ -25,11 +25,12 @@ public class User {
 		
 	}
 	
-	public User(String username, String password, boolean enabled,
+	public User(String username, String password, String email, boolean enabled,
 			String authority) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.email = email;
 		this.enabled = enabled;
 		this.authority = authority;
 	}
