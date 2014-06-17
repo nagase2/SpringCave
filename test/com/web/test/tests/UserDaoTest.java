@@ -48,6 +48,17 @@ public class UserDaoTest {
 		
 		List<User> users=usersDao.getAllUsers();
 		assertEquals("Number of users should be 1", 1,users.size());
+		assertTrue("User should exist", usersDao.exists(user.getUsername()));
+		assertEquals("Created user should be identidal to restricted user", user.getEmail(), users.get(0).getEmail());
+	}
+	
+	@Test
+	public void testCreateUser2(){
+		User user = new User("jossss","ccccccc","aaa@ttt.com",true,"ROLE_USER");
+		assertTrue("User creation should return true",usersDao.create(user));
+		
+		List<User> users=usersDao.getAllUsers();
+		assertEquals("Number of users should be 1", 1,users.size());
 		
 		assertTrue("User should exist", usersDao.exists(user.getUsername()));
 		

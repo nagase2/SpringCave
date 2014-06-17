@@ -1,16 +1,22 @@
 package com.web.dao;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+@javax.persistence.Entity
+@Table(name="users")
 public class User {
 	@NotBlank(message="Username cannot be blank")
 	@Size(min=3,max=15)
+	@Id
+	@Column(name="username")
 	private String username;
+	
 	@NotBlank(message="Password cannot be blank")
 	//@Pattern(regexp="^¥¥S+$",message="password is too simple")
 	@Size(min=3,max=15)
