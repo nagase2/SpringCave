@@ -59,11 +59,14 @@ public class UsersDao {
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
 		Logger.getRootLogger().info("Allusers method");
+		Logger.getRootLogger().info(session().createQuery("from User").getQueryString());
+		
 		return session().createQuery("from User").list();
 	}
-	public List<User> getAllUsers2() {
-		Logger.getRootLogger().info("Allusers method");
-		return jdbc.query("select * from users,  authorities where users.username=authorities.username", BeanPropertyRowMapper.newInstance(User.class));
-	}
+	
+//	public List<User> getAllUsers2() {
+//		Logger.getRootLogger().info("Allusers method");
+//		return jdbc.query("select * from users,  authorities where users.username=authorities.username", BeanPropertyRowMapper.newInstance(User.class));
+//	}
 	
 }
